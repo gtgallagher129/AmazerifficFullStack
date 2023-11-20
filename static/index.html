@@ -1,15 +1,257 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Node on Azure</title>
-</head>
-<body>
-<h1>Node.js and Express Hosted on Microsoft Azure Template</h1>
-<p>This repository serves as a template that can be used to create a Node.js and Express based website that can easily
-be hosted on Microsoft Azure.</p>
 
-Additional application functionality includes:<br />
-<a href="fetching-from-server.html">Accessing Node.js Server-Side Application Programming Interfaces (APIs)</a><br />
-<a href="fetching-remote-dog-breeds.html">Accessing Remote Application Programming Interfaces (APIs)</a>
+<head>
+  <title>Amazeriffic!</title>
+  <style>
+    body {
+      background: #f9e933;
+      font-family: 'Droid Sans', sans-serif;
+    }
+
+    header,
+    main,
+    footer {
+      min-width: 855px;
+    }
+
+    header .container,
+    main .container,
+    footer .container {
+      max-width: 855px;
+      margin: auto;
+    }
+
+    header {
+      padding: 25px 0 25px 0;
+      background: white;
+      overflow: auto;
+      border-bottom: 1px solid #ddd;
+    }
+
+    /* MAIN LOGO */
+    h1 {
+      font-family: 'Ubuntu', sans-serif;
+      font-style: italic;
+      font-size: 3em;
+      color: #b33;
+      float: left;
+      width: 570px;
+    }
+
+    /* FOOTER HEADINGS */
+    h5 {
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 1.25em;
+      margin-bottom: 20px;
+    }
+
+    header nav {
+      float: right;
+      width: 285px;
+    }
+
+    a {
+      color: #f00;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    main {
+      background: #fff;
+      border-radius: 0 5px 5px 5px;
+      padding: 40px;
+    }
+
+    .tabs a span {
+      border-radius: 5px 5px 0 0;
+      display: inline-block;
+      width: 100px;
+      margin-right: 10px;
+      text-align: center;
+      background: #ddd;
+      padding: 5px;
+    }
+
+    .tabs a .active {
+      background: #eee;
+    }
+
+    main .content {
+      padding: 30px 10px 30px 10px;
+      border-radius: 0 5px 5px 5px;
+      background: #eee;
+    }
+
+    main .content li {
+      border-radius: 5px;
+      padding: 3px;
+      background: #eff;
+      margin: 0 0 10px 0;
+    }
+
+    main .content button {
+      font-weight: bold;
+      padding: 0 3px 0 3px;
+      border-radius: 5px;
+      background: #ccc;
+      cursor: pointer;
+      margin-left: 5px;
+      font-size: 1.3em;
+    }
+
+    main .content p {
+      background: yellow;
+    }
+
+    main .content input {
+      font-size: 1.5em;
+    }
+
+    footer {
+      border-top: 1px solid #ddd;
+      padding: 40px 0 20px 0;
+    }
+
+    footer .contact {
+      float: left;
+      width: 570px;
+    }
+
+    footer .contact p:nth-child(2) {
+      color: #b33;
+      font-style: italic;
+    }
+
+    footer .sitemap {
+      float: right;
+      width: 285px;
+    }
+
+    footer ul {
+      width: 230px;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    footer .sitemap .left {
+      float: left;
+    }
+
+    footer .sitemap .right {
+      float: right;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    var main = function () {
+      var toDos = ["Get groceries",
+        "Make up some new ToDos",
+        "Prep for Monday's class",
+        "Answer emails",
+        "Take Gracie to the park",
+        "Finish writing this book"
+      ];
+
+      $(".tabs a span").toArray().forEach(function (element) {
+        var $element = $(element);
+
+        $element.on("click", function () {
+          var $content,
+            $input,
+            $button,
+            i;
+
+          $(".tabs a span").removeClass("active");
+          $element.addClass("active");
+          $("main .content").empty();
+
+          if ($element.parent().is(":nth-child(1)")) {
+            $content = $("<ul>");
+            for (i = toDos.length - 1; i >= 0; i--) {
+              $content.append($("<li>").text(toDos[i]));
+            }
+          } else if ($element.parent().is(":nth-child(2)")) {
+            $content = $("<ul>");
+            toDos.forEach(function (todo) {
+              $content.append($("<li>").text(todo));
+            });
+          } else if ($element.parent().is(":nth-child(3)")) {
+            $input = $("<input>"),
+              $button = $("<button>").text("+");
+
+            $button.on("click", function () {
+              if ($input.val() !== "") {
+                toDos.push($input.val());
+                $input.val("");
+              }
+            });
+
+            $content = $("<div>").append($input).append($button);
+          }
+
+          $("main .content").append($content);
+
+          return false;
+        });
+      });
+
+      $(".tabs a:first-child span").trigger("click");
+    };
+
+    $(document).ready(main);
+  </script>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <h1>Amazeriffic!</h1>
+      <nav>
+        <a href="#">Sign Up!</a> |
+        <a href="#">FAQ</a> |
+        <a href="#">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="tabs">
+        <a href=""><span class="active">Newest</span></a><a href=""><span>Oldest</span></a><a href=""><span>Add</span></a>
+      </div>
+      <div class="content">
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="contact">
+        <h5>Contact Us</h5>
+        <p>Amazeriffic!</p>
+        <p>555 Fiftieth Street</p>
+        <p>Asheville, NC 28801</p>
+      </div>
+      <div class="sitemap">
+        <h5>Sitemap</h5>
+        <ul>
+          <div class="left">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Privacy</a></li>
+          </div>
+          <div class="right">
+            <li><a href="#">Support</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Careers</a></li>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </footer>
 </body>
+
 </html>
